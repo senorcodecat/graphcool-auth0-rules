@@ -4,9 +4,9 @@ This repository contains [Auth0 Rules](https://auth0.com/docs/rules) written in 
 
 ## Generate Graphcool Token
 
-This Rule generates a [Graphcool Node Token](https://www.graph.cool/docs/reference/auth/authentication/authentication-tokens-eip7ahqu5o#node-tokens) using the [Graphcool System API](https://www.graph.cool/docs/reference/auth/authentication/authentication-tokens-eip7ahqu5o#generating-a-node-token-with-the-graphcool-system-api) and adds it to Auth0's generated `idToken` during user authentication.
+This Rule creates a new Graphcool user or adds a new Auth0 Connection to an existing user (if, for instance, the user logs in using Facebook after they've already logged in using Google) after they have successfully authenticated using Auth0. It also generates a [Graphcool Node Token](https://www.graph.cool/docs/reference/auth/authentication/authentication-tokens-eip7ahqu5o#node-tokens) using the [Graphcool System API](https://www.graph.cool/docs/reference/auth/authentication/authentication-tokens-eip7ahqu5o#generating-a-node-token-with-the-graphcool-system-api) and adds it to Auth0's generated `idToken` during user authentication.
 
-The same user may use multiple [Auth0 Connections](https://auth0.com/docs/connections) to login, and this Rule keeps track of those "identities" within the Graphcool schema itself:
+Note that this rule manages the user identity using their email address; this way the same user may use multiple [Auth0 Connections](https://auth0.com/docs/connections) to login, and this Rule keeps track of those "identities" within the Graphcool schema itself:
 
 ```graphql schema
 type User @model {
