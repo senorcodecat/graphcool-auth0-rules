@@ -45,12 +45,12 @@ function generateGraphcoolToken(user, context, callback) {
   }
 
   var getUserAuth0IdentityQuery = `query {
-		Auth0Identity(auth0UserId: "${auth0UserId}") {
-			user {
-				id
-			}
-		}
-	}`;
+    Auth0Identity(auth0UserId: "${auth0UserId}") {
+      user {
+        id
+      }
+    }
+  }`;
 
   // Check if Graphcool already has a record of the authenticating user's Auth0 Identity
   postGcRequest(getUserAuth0IdentityQuery,
@@ -77,10 +77,10 @@ function generateGraphcoolToken(user, context, callback) {
         // In both cases we add the Graphcool token to the response and return!
 
         var getUserByEmailQuery = `query {
-				  User(email: "${user.email}") {
-					  id
-				  }
-			  }`;
+          User(email: "${user.email}") {
+            id
+          }
+        }`;
 
         return postGcRequest(getUserByEmailQuery,
           function (data) {
@@ -100,10 +100,10 @@ function generateGraphcoolToken(user, context, callback) {
   // Create a new Auth0 Identity and attach it to an existing Graphcool user
   function createUserAndAuth0Identity(email, auth0UserId) {
     var createUserMutation = `mutation {
-			createUser(email: "${email}") {
-				id
-			}
-		}`;
+      createUser(email: "${email}") {
+        id
+      }
+    }`;
 
     return postGcRequest(createUserMutation,
       function (data) {
@@ -114,12 +114,12 @@ function generateGraphcoolToken(user, context, callback) {
   // Attach a new Auth0 Identity to an existing Graphcool user
   function createAuth0Identity(auth0UserId, userId) {
     var createAuth0IdentityMutation = `mutation {
-			createAuth0Identity(auth0UserId: "${auth0UserId}", userId: "${userId}") {
-				user {
-					id
-				}
-			}
-		}`;
+      createAuth0Identity(auth0UserId: "${auth0UserId}", userId: "${userId}") {
+        user {
+          id
+        }
+      }
+    }`;
 
     return postGcRequest(createAuth0IdentityMutation,
       function(data) {
