@@ -1,0 +1,8 @@
+{
+  "name": "mblt-auth0",
+  "version": "1.0.0",
+  "dependencies": {
+    "request": "^2.83.0",
+    "validator": "^9.1.2"
+  }
+}
